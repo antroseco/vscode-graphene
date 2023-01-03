@@ -38,6 +38,11 @@
 			"comment": "Top-level keywords",
 			"match": "\\b(typedef|foreign|function|operator|constructor|destructor)\\b",
 			"name": "keyword.other.graphene"
+		},
+		{
+			"comment": "Scope-level keywords",
+			"match": "\\b(let|const)\\b",
+			"name": "keyword.other.graphene"
 		}
 	],
 	"repository": {
