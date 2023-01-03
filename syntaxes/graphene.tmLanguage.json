@@ -33,6 +33,11 @@
 			"comment": "Built-in types",
 			"match": "\\b(i8|u8|i16|u16|i32|u32|i64|u64|int|string)\\b",
 			"name": "storage.type.graphene"
+		},
+		{
+			"comment": "Top-level keywords",
+			"match": "\\b(typedef|foreign|function|operator|constructor|destructor)\\b",
+			"name": "keyword.other.graphene"
 		}
 	],
 	"repository": {
