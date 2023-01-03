@@ -23,6 +23,11 @@
 			"comment": "Boolean values",
 			"match": "\\b(true|false)\\b",
 			"name": "constant.language.graphene"
+		},
+		{
+			"comment": "Floats",
+			"match": "\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b",
+			"name": "constant.numeric.graphene"
 		}
 	],
 	"repository": {
