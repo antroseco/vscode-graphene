@@ -36,13 +36,28 @@
 		},
 		{
 			"comment": "Top-level keywords",
-			"match": "\\b(typedef|foreign|function|operator|constructor|destructor)\\b",
+			"match": "\\b(typedef|foreign|operator|constructor|destructor)\\b",
 			"name": "keyword.other.graphene"
 		},
 		{
 			"comment": "Scope-level keywords",
 			"match": "\\b(let|const)\\b",
 			"name": "keyword.other.graphene"
+		},
+		{
+			"comment": "Function declaration",
+			"match": "\\b(function)\\s+(\\w+)\\s*:\\s*\\(.*\\)\\s*->\\s*(\\w+)",
+			"captures": {
+				"1": {
+					"name": "keyword.other.function.graphene"
+				},
+				"2": {
+					"name": "entity.name.function.graphene"
+				},
+				"3": {
+					"name": "storage.type.graphene"
+				}
+			}
 		}
 	],
 	"repository": {
