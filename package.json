@@ -1,7 +1,7 @@
 {
   "name": "vscode-graphene",
   "displayName": "vscode-graphene",
-  "description": " Syntax highlighting for the Graphene language",
+  "description": "Syntax highlighting for the Graphene language",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.74.0"
@@ -10,16 +10,25 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "graphene",
-      "aliases": ["Graphene", "graphene"],
-      "extensions": [".c3"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "graphene",
-      "scopeName": "source.graphene",
-      "path": "./syntaxes/graphene.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "graphene",
+        "aliases": [
+          "Graphene",
+          "graphene"
+        ],
+        "extensions": [
+          ".c3"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "graphene",
+        "scopeName": "source.graphene",
+        "path": "./syntaxes/graphene.tmLanguage.json"
+      }
+    ]
   }
 }
