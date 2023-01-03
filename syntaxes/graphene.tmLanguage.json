@@ -7,6 +7,22 @@
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"comment": "Line comment",
+			"match": "//.*",
+			"name": "comment.line.double-slash.graphene"
+		},
+		{
+			"comment": "Block comment",
+			"begin": "/\\*",
+			"end": "\\*/",
+			"name": "comment.block.graphene"
+		},
+		{
+			"comment": "Boolean values",
+			"match": "\\b(true|false)\\b",
+			"name": "constant.language.graphene"
 		}
 	],
 	"repository": {
