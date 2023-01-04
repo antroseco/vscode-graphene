@@ -40,11 +40,6 @@
 			"name": "keyword.other.graphene"
 		},
 		{
-			"comment": "Scope-level keywords",
-			"match": "\\b(let|const)\\b",
-			"name": "keyword.other.graphene"
-		},
-		{
 			"comment": "Function declaration",
 			"begin": "\\b(function|constructor|destructor)\\s+(\\w+)\\b",
 			"beginCaptures": {
@@ -136,6 +131,21 @@
 					}
 				}
 			]
+		},
+		{
+			"comment": "Variable declaration",
+			"match": "\\b(let|const)\\s+(\\w+)\\s*:\\s*(\\w+)\\b",
+			"captures": {
+				"1": {
+					"name": "keyword.other.graphene"
+				},
+				"2": {
+					"name": "variable.name.graphene"
+				},
+				"3": {
+					"name": "entity.name.type.graphene"
+				}
+			}
 		}
 	],
 	"repository": {
