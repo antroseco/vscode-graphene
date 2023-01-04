@@ -35,11 +35,6 @@
 			"name": "storage.type.graphene"
 		},
 		{
-			"comment": "Top-level keywords",
-			"match": "\\b(typedef|operator)\\b",
-			"name": "keyword.other.graphene"
-		},
-		{
 			"comment": "Function declaration",
 			"begin": "\\b(function|constructor|destructor)\\s+(\\w+)\\b",
 			"beginCaptures": {
@@ -153,6 +148,18 @@
 			"captures": {
 				"1": {
 					"name": "entity.name.function.graphene"
+				}
+			}
+		},
+		{
+			"comment": "Typedef declaration",
+			"match": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)",
+			"captures": {
+				"1": {
+					"name": "keyword.other.graphene"
+				},
+				"3": {
+					"name": "entity.name.type.graphene"
 				}
 			}
 		}
