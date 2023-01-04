@@ -105,6 +105,37 @@
 					}
 				}
 			]
+		},
+		{
+			"comment": "Operator declaration",
+			"begin": "(@operator)\\s+([.<>%*$@|&\\/=?!+^\\-]+)\\s*:",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.graphene"
+				},
+				"2": {
+					"name": "entity.name.function.graphene"
+				}
+			},
+			"end": "->\\s*(\\w+)\\s*=",
+			"endCaptures": {
+				"1": {
+					"name": "entity.name.type.graphene"
+				}
+			},
+			"patterns": [
+				{
+					"match": "(\\w+)\\s*:\\s*(\\w+)",
+					"captures": {
+						"1": {
+							"name": "variable.name.graphene"
+						},
+						"2": {
+							"name": "entity.name.type.graphene"
+						}
+					}
+				}
+			]
 		}
 	],
 	"repository": {
