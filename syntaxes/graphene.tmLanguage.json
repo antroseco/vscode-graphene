@@ -181,15 +181,29 @@
 		},
 		{
 			"comment": "Typedef declaration",
-			"match": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)",
-			"captures": {
+			"begin": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)",
+			"beginCaptures": {
 				"1": {
 					"name": "keyword.other.graphene"
 				},
 				"3": {
 					"name": "entity.name.type.graphene"
 				}
-			}
+			},
+			"end": "}",
+			"patterns": [
+				{
+					"match": "(\\w+)\\s*:\\s*(\\w+)",
+					"captures": {
+						"1": {
+							"name": "variable.name.graphene"
+						},
+						"2": {
+							"name": "entity.name.type.graphene"
+						}
+					}
+				}
+			]
 		}
 	],
 	"repository": {
