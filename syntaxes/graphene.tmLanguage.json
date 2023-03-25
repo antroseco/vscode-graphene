@@ -67,9 +67,9 @@
 		},
 		{
 			"comment": "Constructor/Destructor declaration",
-			"begin": "(@constructor|@destructor)",
+			"begin": "(^|\\s)(@constructor|@destructor)\\b",
 			"beginCaptures": {
-				"1": {
+				"2": {
 					"name": "keyword.other.graphene"
 				}
 			},
@@ -126,12 +126,12 @@
 		},
 		{
 			"comment": "Operator declaration",
-			"begin": "(@operator)\\s+([.<>%*$@|&\\/=?!+^\\-]+)\\s*:",
+			"begin": "(^|\\s)(@operator)\\s+([.<>%*$@|&\\/=?!+^\\-]+)\\s*:",
 			"beginCaptures": {
-				"1": {
+				"2": {
 					"name": "keyword.other.graphene"
 				},
-				"2": {
+				"3": {
 					"name": "entity.name.function.graphene"
 				}
 			},
