@@ -196,7 +196,7 @@
 		},
 		{
 			"comment": "Type after typedef",
-			"match": "(?<=(typedef)\\s+)(\\w*)",
+			"match": "(?<=(typedef)(.*?\\])?\\s+)(\\w*)",
 			"name": "entity.name.type.graphene"
 		},
 		{
