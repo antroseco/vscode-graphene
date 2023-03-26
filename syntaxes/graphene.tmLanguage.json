@@ -109,11 +109,6 @@
 			"name": "keyword.other.function.graphene"
 		},
 		{
-			"comment": "Function and @operator names",
-			"match": "(?<=(function|foreign|@operator)(.*?\\])?\\s+)(\\w+)",
-			"name": "entity.name.function.graphene"
-		},
-		{
 			"comment": "Generics list in function declarations",
 			"begin": "(?<=(function|@operator)\\s*)(\\[)",
 			"end": "\\]",
@@ -122,6 +117,16 @@
 					"include": "#type-list"
 				}
 			]
+		},
+		{
+			"comment": "Function names",
+			"match": "(?<=(function|foreign)(.*?\\])?\\s+)(\\w+)",
+			"name": "entity.name.function.graphene"
+		},
+		{
+			"comment": "@operator name",
+			"match": "(?<=(operator)(.*?\\])?\\s+)(\\S+)",
+			"name": "entity.name.function.graphene"
 		},
 		{
 			"comment": "Arguments list in function declarations",
