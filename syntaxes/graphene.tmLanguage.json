@@ -20,11 +20,6 @@
 			"name": "comment.block.graphene"
 		},
 		{
-			"comment": "this variable",
-			"match": "\\bthis\\b",
-			"name": "variable.language.this.graphene"
-		},
-		{
 			"comment": "Boolean values",
 			"match": "\\b(true|false)\\b",
 			"name": "constant.language.graphene"
@@ -185,45 +180,24 @@
 			}
 		},
 		{
-			"comment": "Typedef declaration (struct)",
-			"begin": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)\\s*:\\s*{",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.graphene"
-				},
-				"3": {
-					"name": "entity.name.type.graphene"
-				}
-			},
-			"end": "}",
-			"patterns": [
-				{
-					"match": "(\\w+)\\s*:\\s*(\\w+)",
-					"captures": {
-						"1": {
-							"name": "variable.name.graphene"
-						},
-						"2": {
-							"name": "entity.name.type.graphene"
-						}
-					}
-				}
-			]
+			"comment": "typedef keyword",
+			"match": "\\b(typedef)\\b",
+			"name": "keyword.other.typedef.graphene"
 		},
 		{
-			"comment": "Typedef declaration (non-struct)",
-			"match": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)\\s*:\\s*(\\w+)(\\[.*\\])?",
-			"captures": {
-				"1": {
-					"name": "keyword.other.graphene"
-				},
-				"3": {
-					"name": "entity.name.type.graphene"
-				},
-				"4": {
-					"name": "entity.name.type.graphene"
+			"comment": "Type after typedef",
+			"match": "(?<=(typedef)\\s+)([a-zA-Z_][a-zA-Z0-9_]*)",
+			"name": "entity.name.type.graphene"
+		},
+		{
+			"comment": "Struct after typedef",
+			"begin": "(?<=(typedef).*?)({)",
+			"patterns": [
+				{
+					"include": "#argument-list"
 				}
-			}
+			],
+			"end": "}|$"
 		}
 	],
 	"repository": {
@@ -243,6 +217,22 @@
 				{
 					"name": "constant.character.escape.graphene",
 					"match": "\\\\."
+				}
+			]
+		},
+		"argument-list": {
+			"patterns": [
+				{
+					"comment": "Argument",
+					"match": "(\\w+)\\s*:\\s*(\\w+)",
+					"captures": {
+						"1": {
+							"name": "variable.parameter.graphene"
+						},
+						"2": {
+							"name": "entity.name.type.graphene"
+						}
+					}
 				}
 			]
 		}
