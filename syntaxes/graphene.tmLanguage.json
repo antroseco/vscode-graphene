@@ -180,8 +180,8 @@
 			}
 		},
 		{
-			"comment": "Typedef declaration",
-			"begin": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)",
+			"comment": "Typedef declaration (struct)",
+			"begin": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)\\s*:\\s*{",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.other.graphene"
@@ -204,6 +204,21 @@
 					}
 				}
 			]
+		},
+		{
+			"comment": "Typedef declaration (non-struct)",
+			"match": "\\b(typedef)(\\[.*\\])?\\s*(\\w+)\\s*:\\s*(\\w+)(\\[.*\\])?",
+			"captures": {
+				"1": {
+					"name": "keyword.other.graphene"
+				},
+				"3": {
+					"name": "entity.name.type.graphene"
+				},
+				"4": {
+					"name": "entity.name.type.graphene"
+				}
+			}
 		}
 	],
 	"repository": {
