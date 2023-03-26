@@ -66,7 +66,7 @@
 		{
 			"comment": "Generics list after typedef",
 			"begin": "(?<=(typedef)\\s*)(\\[)",
-			"end": "\\]",
+			"end": "\\]|$",
 			"patterns": [
 				{
 					"include": "#type-list"
@@ -111,7 +111,7 @@
 		{
 			"comment": "Generics list in function declarations",
 			"begin": "(?<=(function|@operator)\\s*)(\\[)",
-			"end": "\\]",
+			"end": "\\]|$",
 			"patterns": [
 				{
 					"include": "#type-list"
@@ -131,7 +131,7 @@
 		{
 			"comment": "Arguments list in function declarations",
 			"begin": "(?<=(function|foreign|@operator|@constructor|@destructor).*?\\()",
-			"end": "\\)",
+			"end": "\\)|$",
 			"patterns": [
 				{
 					"include": "#argument-list"
