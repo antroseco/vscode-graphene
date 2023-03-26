@@ -36,12 +36,12 @@
 		},
 		{
 			"comment": "Function declaration",
-			"begin": "\\b(function)\\s+(\\w+)\\b",
+			"begin": "\\b(function)(\\[.*\\])?\\s+(\\w+)\\b",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.other.graphene"
 				},
-				"2": {
+				"3": {
 					"name": "entity.name.function.graphene"
 				}
 			},
