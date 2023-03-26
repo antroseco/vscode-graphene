@@ -185,6 +185,16 @@
 			"name": "keyword.other.typedef.graphene"
 		},
 		{
+			"comment": "Generics list after typedef",
+			"begin": "(?<=(typedef)\\s*)(\\[)",
+			"end": "\\]",
+			"patterns": [
+				{
+					"include": "#type-list"
+				}
+			]
+		},
+		{
 			"comment": "Type after typedef",
 			"match": "(?<=(typedef)\\s+)(\\w*)",
 			"name": "entity.name.type.graphene"
@@ -230,6 +240,15 @@
 				{
 					"comment": "Argument Type",
 					"match": "(?<=:)\\s*(\\w+)",
+					"name": "entity.name.type.graphene"
+				}
+			]
+		},
+		"type-list": {
+			"patterns": [
+				{
+					"comment": "Type Name",
+					"match": "\\b\\w+\\b",
 					"name": "entity.name.type.graphene"
 				}
 			]
