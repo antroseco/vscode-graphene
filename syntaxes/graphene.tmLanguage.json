@@ -216,6 +216,10 @@
 				{
 					"name": "keyword.control.graphene",
 					"match": "\\b(if|while|for|return)\\b"
+				},
+				{
+					"name": "keyword.other.require.graphene",
+					"match": "(?<=^|\\s)@require_once\\b"
 				}
 			]
 		},
