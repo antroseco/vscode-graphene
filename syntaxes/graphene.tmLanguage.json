@@ -216,7 +216,7 @@
 		},
 		{
 			"comment": "Last type after typedef",
-			"begin": "(?<=(typedef).*?:)",
+			"begin": "(?<=(typedef).*?:)(?!\\s*{)",
 			"end": ";|$",
 			"patterns": [
 				{
