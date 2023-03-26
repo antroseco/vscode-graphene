@@ -20,6 +20,11 @@
 			"name": "comment.block.graphene"
 		},
 		{
+			"comment": "this variable",
+			"match": "\\bthis\\b",
+			"name": "variable.language.this.graphene"
+		},
+		{
 			"comment": "Boolean values",
 			"match": "\\b(true|false)\\b",
 			"name": "constant.language.graphene"
