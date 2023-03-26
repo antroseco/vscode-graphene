@@ -196,18 +196,33 @@
 		},
 		{
 			"comment": "Type after typedef",
-			"match": "(?<=(typedef)(.*?\\])?\\s+)(\\w*)",
-			"name": "entity.name.type.graphene"
+			"begin": "(?<=(typedef)(.*?\\])?\\s+)",
+			"end": ":|$",
+			"patterns": [
+				{
+					"include": "#type-name"
+				}
+			]
 		},
 		{
 			"comment": "Struct after typedef",
-			"begin": "(?<=(typedef).*?)({)",
+			"begin": "(?<=(typedef).*?{)",
 			"patterns": [
 				{
 					"include": "#argument-list"
 				}
 			],
 			"end": "}|$"
+		},
+		{
+			"comment": "Last type after typedef",
+			"begin": "(?<=(typedef).*?:)",
+			"end": ";|$",
+			"patterns": [
+				{
+					"include": "#type-name"
+				}
+			]
 		}
 	],
 	"repository": {
@@ -252,6 +267,15 @@
 			"patterns": [
 				{
 					"comment": "Type Name",
+					"match": "\\b\\w+\\b",
+					"name": "entity.name.type.graphene"
+				}
+			]
+		},
+		"type-name": {
+			"patterns": [
+				{
+					"comment": "Type Identifier",
 					"match": "\\b\\w+\\b",
 					"name": "entity.name.type.graphene"
 				}
