@@ -35,127 +35,6 @@
 			"name": "storage.type.graphene"
 		},
 		{
-			"comment": "Function declaration",
-			"begin": "\\b(function)(\\[.*\\])?\\s+(\\w+)\\b",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.graphene"
-				},
-				"3": {
-					"name": "entity.name.function.graphene"
-				}
-			},
-			"end": "->\\s*([a-zA-Z]\\w*).+=",
-			"endCaptures": {
-				"1": {
-					"name": "entity.name.type.graphene"
-				}
-			},
-			"patterns": [
-				{
-					"match": "(\\w+)\\s*:\\s*(\\w+)",
-					"captures": {
-						"1": {
-							"name": "variable.name.graphene"
-						},
-						"2": {
-							"name": "entity.name.type.graphene"
-						}
-					}
-				}
-			]
-		},
-		{
-			"comment": "Constructor/Destructor declaration",
-			"begin": "(^|\\s)(@constructor|@destructor)\\b",
-			"beginCaptures": {
-				"2": {
-					"name": "keyword.other.graphene"
-				}
-			},
-			"end": "->\\s*([a-zA-Z]\\w*).+=",
-			"endCaptures": {
-				"1": {
-					"name": "entity.name.type.graphene"
-				}
-			},
-			"patterns": [
-				{
-					"match": "(\\w+)\\s*:\\s*(\\w+)",
-					"captures": {
-						"1": {
-							"name": "variable.name.graphene"
-						},
-						"2": {
-							"name": "entity.name.type.graphene"
-						}
-					}
-				}
-			]
-		},
-		{
-			"comment": "Foreign declaration",
-			"begin": "\\b(foreign)\\s+(\\w+)\\b",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.graphene"
-				},
-				"2": {
-					"name": "entity.name.function.graphene"
-				}
-			},
-			"end": "->\\s*([a-zA-Z]\\w*).+;",
-			"endCaptures": {
-				"1": {
-					"name": "entity.name.type.graphene"
-				}
-			},
-			"patterns": [
-				{
-					"match": "(\\w+)\\s*:\\s*(\\w+)",
-					"captures": {
-						"1": {
-							"name": "variable.name.graphene"
-						},
-						"2": {
-							"name": "entity.name.type.graphene"
-						}
-					}
-				}
-			]
-		},
-		{
-			"comment": "Operator declaration",
-			"begin": "(^|\\s)(@operator)\\s+([.<>%*$@|&\\/=?!+^\\-]+)\\s*:",
-			"beginCaptures": {
-				"2": {
-					"name": "keyword.other.graphene"
-				},
-				"3": {
-					"name": "entity.name.function.graphene"
-				}
-			},
-			"end": "->\\s*([a-zA-Z]\\w*).+=",
-			"endCaptures": {
-				"1": {
-					"name": "entity.name.type.graphene"
-				}
-			},
-			"patterns": [
-				{
-					"match": "(\\w+)\\s*:\\s*(\\w+)",
-					"captures": {
-						"1": {
-							"name": "variable.name.graphene"
-						},
-						"2": {
-							"name": "entity.name.type.graphene"
-						}
-					}
-				}
-			]
-		},
-		{
 			"comment": "Variable declaration",
 			"match": "\\b(let|const)\\s+(\\w+)\\s*:\\s*(\\w+)\\b",
 			"captures": {
@@ -223,6 +102,46 @@
 					"include": "#type-name"
 				}
 			]
+		},
+		{
+			"comment": "Function declaration keywords",
+			"match": "(?:^|\\s)(function|foreign|@operator|@constructor|@destructor)\\b",
+			"name": "keyword.other.function.graphene"
+		},
+		{
+			"comment": "Function and @operator names",
+			"match": "(?<=(function|foreign|@operator)(.*?\\])?\\s+)(\\w+)",
+			"name": "entity.name.function.graphene"
+		},
+		{
+			"comment": "Generics list in function declarations",
+			"begin": "(?<=(function|@operator)\\s*)(\\[)",
+			"end": "\\]",
+			"patterns": [
+				{
+					"include": "#type-list"
+				}
+			]
+		},
+		{
+			"comment": "Arguments list in function declarations",
+			"begin": "(?<=(function|foreign|@operator|@constructor|@destructor).*?\\()",
+			"end": "\\)",
+			"patterns": [
+				{
+					"include": "#argument-list"
+				}
+			]
+		},
+		{
+			"comment": "Return type in function declarations",
+			"begin": "(?<=(function|foreign|@operator|@constructor|@destructor).*?(-\\>))",
+			"end": "=|$",
+			"patterns": [
+				{
+					"include": "#type-name"
+				}
+			]
 		}
 	],
 	"repository": {
@@ -253,7 +172,7 @@
 			"patterns": [
 				{
 					"comment": "Argument Name",
-					"match": "(?<=,|{)\\s*(\\w+)",
+					"match": "(?<=,|\\(|{)\\s*(\\w+)",
 					"name": "variable.parameter.graphene"
 				},
 				{
