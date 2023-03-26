@@ -223,16 +223,14 @@
 		"argument-list": {
 			"patterns": [
 				{
-					"comment": "Argument",
-					"match": "(\\w+)\\s*:\\s*(\\w+)",
-					"captures": {
-						"1": {
-							"name": "variable.parameter.graphene"
-						},
-						"2": {
-							"name": "entity.name.type.graphene"
-						}
-					}
+					"comment": "Argument Name",
+					"match": "(?<=,|{)\\s*(\\w+)",
+					"name": "variable.parameter.graphene"
+				},
+				{
+					"comment": "Argument Type",
+					"match": "(?<=:)\\s*(\\w+)",
+					"name": "entity.name.type.graphene"
 				}
 			]
 		}
