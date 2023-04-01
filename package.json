@@ -3,7 +3,7 @@
   "displayName": "Graphene syntax highlighting",
   "description": "Syntax highlighting for the Graphene language",
   "publisher": "antroseco",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.74.0"
   },
