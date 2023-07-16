@@ -105,12 +105,12 @@
 		},
 		{
 			"comment": "Function declaration keywords",
-			"match": "(?:^|\\s)(function|foreign|@operator|@constructor|@destructor)\\b",
+			"match": "(?:^|\\s)(function|foreign|@operator|@implicit)\\b",
 			"name": "keyword.other.function.graphene"
 		},
 		{
 			"comment": "Generics list in function declarations",
-			"begin": "(?<=(function|@operator)\\s*)(\\[)",
+			"begin": "(?<=(function|@operator|@implicit)\\s*)(\\[)",
 			"end": "\\]|$",
 			"patterns": [
 				{
@@ -120,7 +120,7 @@
 		},
 		{
 			"comment": "Function names",
-			"match": "(?<=(function|foreign)(.*?\\])?\\s+)(\\w+)",
+			"match": "(?<=(function|foreign|@implicit)(.*?\\])?\\s+)(\\w+)",
 			"name": "entity.name.function.graphene"
 		},
 		{
@@ -130,7 +130,7 @@
 		},
 		{
 			"comment": "Arguments list in function declarations",
-			"begin": "(?<=(function|foreign|@operator|@constructor|@destructor).*?\\()",
+			"begin": "(?<=(function|foreign|@operator|@implicit).*?\\()",
 			"end": "\\)|$",
 			"patterns": [
 				{
@@ -140,7 +140,7 @@
 		},
 		{
 			"comment": "Return type in function declarations",
-			"begin": "(?<=(function|foreign|@operator|@constructor|@destructor).*?(-\\>))",
+			"begin": "(?<=(function|foreign|@operator|@implicit).*?(-\\>))",
 			"end": "=|$",
 			"patterns": [
 				{
