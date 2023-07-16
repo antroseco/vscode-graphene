@@ -154,7 +154,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.graphene",
-					"match": "\\b(if|else|while|for|return)\\b"
+					"match": "\\b(if|else|while|for|in|return)\\b"
 				},
 				{
 					"name": "keyword.other.require.graphene",
