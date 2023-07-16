@@ -96,7 +96,7 @@
 		{
 			"comment": "Last type after typedef",
 			"begin": "(?<=(typedef).*?:)(?!\\s*{)",
-			"end": ";|$",
+			"end": "$",
 			"patterns": [
 				{
 					"include": "#type-name"
