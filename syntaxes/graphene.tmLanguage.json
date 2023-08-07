@@ -25,8 +25,8 @@
 			"name": "constant.language.graphene"
 		},
 		{
-			"comment": "Floats",
-			"match": "\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b",
+			"comment": "Decimal constants",
+			"match": "\\b\\d+(\\.\\d+)?\\b",
 			"name": "constant.numeric.graphene"
 		},
 		{
