@@ -30,6 +30,11 @@
 			"name": "constant.numeric.graphene"
 		},
 		{
+			"comment": "Hexadecimal constants",
+			"match": "\\b0x[a-fA-F\\d]+\\b",
+			"name": "constant.numeric.graphene"
+		},
+		{
 			"comment": "Built-in types",
 			"match": "\\b(i8|u8|i16|u16|i32|u32|i64|u64|i128|u128|int|isize|iptr|bool|void)\\b",
 			"name": "storage.type.graphene"
