@@ -211,6 +211,15 @@
 				}
 			]
 		},
+		"generics-list": {
+			"begin": "\\[",
+			"end": "\\]",
+			"patterns": [
+				{
+					"include": "#type-list"
+				}
+			]
+		},
 		"functions": {
 			"patterns": [
 				{
@@ -235,6 +244,9 @@
 					"patterns": [
 						{
 							"include": "#comments"
+						},
+						{
+							"include": "#generics-list"
 						},
 						{
 							"match": "\\w+",
