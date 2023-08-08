@@ -187,6 +187,16 @@
 							"include": "#comments"
 						},
 						{
+							"comment": "TODO can we merge this with struct highlighting?",
+							"begin": "{",
+							"end": "}",
+							"patterns": [
+								{
+									"include": "#argument-list"
+								}
+							]
+						},
+						{
 							"include": "#type-name"
 						}
 					]
