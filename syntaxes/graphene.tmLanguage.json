@@ -167,7 +167,7 @@
 					"match": "\\b(if|else|while|for|in|return)\\b"
 				},
 				{
-					"name": "keyword.other.require.graphene",
+					"name": "keyword.control.import.graphene",
 					"match": "(?<=^|\\s)@require_once\\b"
 				}
 			]
