@@ -89,47 +89,49 @@
 			]
 		},
 		{
-			"comment": "Function declaration keywords",
-			"match": "(?:^|\\s)(function|foreign|@operator|@implicit)\\b",
-			"name": "keyword.other.function.graphene"
-		},
-		{
-			"comment": "Generics list in function declarations",
-			"begin": "(?<=(function|@operator|@implicit)\\s*)(\\[)",
-			"end": "\\]|$",
+			"comment": "Functions (non-foreign)",
 			"patterns": [
 				{
-					"include": "#type-list"
-				}
-			]
-		},
-		{
-			"comment": "Function names",
-			"match": "(?<=(function|foreign|@implicit)(.*?\\])?\\s+)(\\w+)",
-			"name": "entity.name.function.graphene"
-		},
-		{
-			"comment": "@operator name",
-			"match": "(?<=(operator)(.*?\\])?\\s+)(\\S+)",
-			"name": "entity.name.function.graphene"
-		},
-		{
-			"comment": "Arguments list in function declarations",
-			"begin": "(?<=(function|foreign|@operator|@implicit).*?\\()",
-			"end": "\\)|$",
-			"patterns": [
+					"begin": "(?<=^|\\s)(function|@operator|@implicit)\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.other.function.graphene"
+						}
+					},
+					"end": ":",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"match": "\\w+",
+							"name": "entity.name.function.graphene"
+						}
+					]
+				},
 				{
-					"include": "#argument-list"
-				}
-			]
-		},
-		{
-			"comment": "Return type in function declarations",
-			"begin": "(?<=(function|foreign|@operator|@implicit).*?(-\\>))",
-			"end": "=|$",
-			"patterns": [
+					"begin": "\\(",
+					"end": "->",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#argument-list"
+						}
+					]
+				},
 				{
-					"include": "#type-name"
+					"begin": "(?<=->)",
+					"end": "=",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#type-name"
+						}
+					]
 				}
 			]
 		}
@@ -206,14 +208,32 @@
 		"argument-list": {
 			"patterns": [
 				{
-					"comment": "Argument Name",
-					"match": "(?<=,|\\(|{)\\s*(\\w+)",
-					"name": "variable.parameter.graphene"
+					"include": "#comments"
 				},
 				{
-					"comment": "Argument Type",
-					"match": "(?<=:)\\s*(\\w+)",
-					"name": "entity.name.type.graphene"
+					"begin": "\\b",
+					"end": ":",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"match": "\\b\\w+\\b",
+							"name": "variable.parameter.graphene"
+						}
+					]
+				},
+				{
+					"begin": "(?<=:)",
+					"end": ",|\\)|}",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#type-name"
+						}
+					]
 				}
 			]
 		},
