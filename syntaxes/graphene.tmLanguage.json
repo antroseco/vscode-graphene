@@ -15,6 +15,9 @@
 			"include": "#literals"
 		},
 		{
+			"include": "#functions"
+		},
+		{
 			"comment": "Built-in types",
 			"match": "\\b(i8|u8|i16|u16|i32|u32|i64|u64|i128|u128|int|isize|iptr|bool|void)\\b",
 			"name": "storage.type.graphene"
@@ -85,53 +88,6 @@
 			"patterns": [
 				{
 					"include": "#type-name"
-				}
-			]
-		},
-		{
-			"comment": "Functions (non-foreign)",
-			"patterns": [
-				{
-					"begin": "(?<=^|\\s)(function|@operator|@implicit)\\b",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.other.function.graphene"
-						}
-					},
-					"end": ":",
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"match": "\\w+",
-							"name": "entity.name.function.graphene"
-						}
-					]
-				},
-				{
-					"begin": "\\(",
-					"end": "->",
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#argument-list"
-						}
-					]
-				},
-				{
-					"begin": "(?<=->)",
-					"end": "=",
-					"patterns": [
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#type-name"
-						}
-					]
 				}
 			]
 		}
@@ -254,6 +210,63 @@
 					"name": "entity.name.type.graphene"
 				}
 			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"include": "#function-name"
+				},
+				{
+					"include": "#function-arguments"
+				},
+				{
+					"include": "#function-return-type"
+				}
+			],
+			"repository": {
+				"function-name": {
+					"begin": "(?<=^|\\s)(function|foreign|@operator|@implicit)\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.other.function.graphene"
+						}
+					},
+					"end": ":",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"match": "\\w+",
+							"name": "entity.name.function.graphene"
+						}
+					]
+				},
+				"function-arguments": {
+					"begin": "\\(",
+					"end": "->",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#argument-list"
+						}
+					]
+				},
+				"function-return-type": {
+					"begin": "(?<=->)",
+					"end": "(?<=\\w)(?=\\s)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#type-name"
+						}
+					]
+				}
+			}
 		}
 	},
 	"scopeName": "source.graphene"
