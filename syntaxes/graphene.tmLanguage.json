@@ -12,24 +12,7 @@
 			"include": "#strings"
 		},
 		{
-			"comment": "Boolean values",
-			"match": "\\b(true|false)\\b",
-			"name": "constant.language.graphene"
-		},
-		{
-			"comment": "Decimal constants",
-			"match": "\\b\\d+(\\.\\d+)?\\b",
-			"name": "constant.numeric.graphene"
-		},
-		{
-			"comment": "Hexadecimal constants",
-			"match": "\\b0x[a-fA-F\\d]+\\b",
-			"name": "constant.numeric.graphene"
-		},
-		{
-			"comment": "Invalid hexadecimal constants",
-			"match": "\\b0x\\b",
-			"name": "invalid.illegal.constant.numeric.graphene"
+			"include": "#literals"
 		},
 		{
 			"comment": "Built-in types",
@@ -179,14 +162,44 @@
 				}
 			]
 		},
-		"strings": {
-			"name": "string.quoted.double.graphene",
-			"begin": "\"",
-			"end": "\"",
+		"literals": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.graphene",
-					"match": "\\\\."
+					"comment": "Decimal constants",
+					"match": "\\b\\d+(\\.\\d+)?\\b",
+					"name": "constant.numeric.graphene"
+				},
+				{
+					"comment": "Hexadecimal constants",
+					"match": "\\b0x[a-fA-F\\d]+\\b",
+					"name": "constant.numeric.graphene"
+				},
+				{
+					"comment": "Invalid hexadecimal constants",
+					"match": "\\b0x\\b",
+					"name": "invalid.illegal.constant.numeric.graphene"
+				},
+				{
+					"comment": "true constant",
+					"match": "\\btrue\\b",
+					"name": "constant.language.true.graphene"
+				},
+				{
+					"comment": "false constant",
+					"match": "\\bfalse\\b",
+					"name": "constant.language.true.graphene"
+				},
+				{
+					"comment": "String literals",
+					"name": "string.quoted.double.graphene",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.graphene",
+							"match": "\\\\."
+						}
+					]
 				}
 			]
 		},
