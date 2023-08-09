@@ -130,7 +130,7 @@
 				},
 				{
 					"begin": "(?=\\w)",
-					"end": ":",
+					"end": ":|(?=\\))|(?=\\})",
 					"patterns": [
 						{
 							"include": "#comments"
