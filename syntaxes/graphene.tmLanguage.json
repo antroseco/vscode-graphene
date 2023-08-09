@@ -287,9 +287,6 @@
 					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
 					"patterns": [
 						{
-							"include": "#comments"
-						},
-						{
 							"include": "#typedef-name"
 						},
 						{
