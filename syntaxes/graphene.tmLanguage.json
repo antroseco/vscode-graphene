@@ -156,6 +156,15 @@
 				}
 			]
 		},
+		"struct-definition": {
+			"begin": "{",
+			"end": "}",
+			"patterns": [
+				{
+					"include": "#argument-list"
+				}
+			]
+		},
 		"argument-list": {
 			"patterns": [
 				{
@@ -176,20 +185,13 @@
 				},
 				{
 					"begin": "(?<=:)",
-					"end": ",|\\)|}",
+					"end": "(?=,|\\)|})",
 					"patterns": [
 						{
 							"include": "#comments"
 						},
 						{
-							"comment": "TODO can we merge this with struct highlighting?",
-							"begin": "{",
-							"end": "}",
-							"patterns": [
-								{
-									"include": "#argument-list"
-								}
-							]
+							"include": "#struct-definition"
 						},
 						{
 							"include": "#type-name"
@@ -296,6 +298,9 @@
 					"patterns": [
 						{
 							"include": "#comments"
+						},
+						{
+							"include": "#struct-definition"
 						},
 						{
 							"include": "#type-name"
