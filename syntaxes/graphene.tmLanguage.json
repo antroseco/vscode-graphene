@@ -86,7 +86,7 @@
 				{
 					"comment": "false constant",
 					"match": "\\bfalse\\b",
-					"name": "constant.language.true.graphene"
+					"name": "constant.language.false.graphene"
 				},
 				{
 					"comment": "String literals",
