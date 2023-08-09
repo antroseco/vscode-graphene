@@ -272,6 +272,9 @@
 					"end": ":",
 					"patterns": [
 						{
+							"include": "#comments"
+						},
+						{
 							"include": "#generics-list"
 						},
 						{
