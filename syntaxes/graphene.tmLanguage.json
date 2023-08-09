@@ -238,28 +238,37 @@
 		"functions": {
 			"patterns": [
 				{
-					"include": "#function-name"
-				},
-				{
-					"include": "#function-arguments"
-				},
-				{
-					"include": "#function-return-type"
+					"include": "#function-declaration"
 				}
 			],
 			"repository": {
-				"function-name": {
+				"function-declaration": {
 					"begin": "(?<=^|\\s)(function|foreign|@operator|@implicit)\\b",
 					"beginCaptures": {
 						"0": {
 							"name": "keyword.other.function.graphene"
 						}
 					},
-					"end": ":",
+					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
 					"patterns": [
 						{
 							"include": "#comments"
 						},
+						{
+							"include": "#function-name"
+						},
+						{
+							"include": "#function-arguments"
+						},
+						{
+							"include": "#function-return-types"
+						}
+					]
+				},
+				"function-name": {
+					"begin": "\\G",
+					"end": ":",
+					"patterns": [
 						{
 							"include": "#generics-list"
 						},
