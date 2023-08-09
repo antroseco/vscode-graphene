@@ -246,9 +246,6 @@
 					"end": "(?<=\\))",
 					"patterns": [
 						{
-							"include": "#comments"
-						},
-						{
 							"include": "#argument-list"
 						}
 					]
