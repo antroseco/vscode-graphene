@@ -280,7 +280,7 @@
 				},
 				"function-arguments": {
 					"begin": "\\(",
-					"end": "->",
+					"end": "(?<=\\))",
 					"patterns": [
 						{
 							"include": "#comments"
