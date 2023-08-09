@@ -18,6 +18,9 @@
 			"include": "#functions"
 		},
 		{
+			"include": "#typedefs"
+		},
+		{
 			"comment": "Variable declaration",
 			"match": "\\b(let|const)\\s+(\\w+)\\s*:\\s*(\\w+)\\b",
 			"captures": {
@@ -40,51 +43,6 @@
 					"name": "entity.name.function.graphene"
 				}
 			}
-		},
-		{
-			"comment": "typedef keyword",
-			"match": "\\b(typedef)\\b",
-			"name": "keyword.other.typedef.graphene"
-		},
-		{
-			"comment": "Generics list after typedef",
-			"begin": "(?<=(typedef)\\s*)(\\[)",
-			"end": "\\]|$",
-			"patterns": [
-				{
-					"include": "#type-list"
-				}
-			]
-		},
-		{
-			"comment": "Type after typedef",
-			"begin": "(?<=(typedef)(.*?\\])?\\s+)",
-			"end": ":|$",
-			"patterns": [
-				{
-					"include": "#type-name"
-				}
-			]
-		},
-		{
-			"comment": "Struct after typedef",
-			"begin": "(?<=(typedef).*?{)",
-			"patterns": [
-				{
-					"include": "#argument-list"
-				}
-			],
-			"end": "}|$"
-		},
-		{
-			"comment": "Last type after typedef",
-			"begin": "(?<=(typedef).*?:)(?!\\s*{)",
-			"end": "$",
-			"patterns": [
-				{
-					"include": "#type-name"
-				}
-			]
 		}
 	],
 	"repository": {
@@ -298,6 +256,65 @@
 				"function-return-type": {
 					"begin": "->",
 					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@|=)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#struct-definition"
+						},
+						{
+							"include": "#type-name"
+						}
+					]
+				}
+			}
+		},
+		"typedefs": {
+			"patterns": [
+				{
+					"include": "#typedef-declaration"
+				}
+			],
+			"repository": {
+				"typedef-declaration": {
+					"begin": "\\btypedef\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.other.typedef.graphene"
+						}
+					},
+					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#typedef-name"
+						},
+						{
+							"include": "#typedef-definition"
+						}
+					]
+				},
+				"typedef-name": {
+					"begin": "\\G",
+					"end": ":",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#generics-list"
+						},
+						{
+							"include": "#type-name"
+						}
+					]
+				},
+				"typedef-definition": {
+					"begin": "(?<=:)",
+					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
 					"patterns": [
 						{
 							"include": "#comments"
