@@ -129,7 +129,7 @@
 					"include": "#comments"
 				},
 				{
-					"begin": "\\b",
+					"begin": "(?=\\w)",
 					"end": ":",
 					"patterns": [
 						{
