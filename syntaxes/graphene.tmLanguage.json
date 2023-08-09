@@ -261,7 +261,7 @@
 							"include": "#function-arguments"
 						},
 						{
-							"include": "#function-return-types"
+							"include": "#function-return-type"
 						}
 					]
 				},
@@ -291,8 +291,8 @@
 					]
 				},
 				"function-return-type": {
-					"begin": "(?<=->)",
-					"end": "(?<=\\w)(?=\\s)",
+					"begin": "->",
+					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@|=)",
 					"patterns": [
 						{
 							"include": "#comments"
