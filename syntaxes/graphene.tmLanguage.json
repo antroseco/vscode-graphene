@@ -21,19 +21,7 @@
 			"include": "#typedefs"
 		},
 		{
-			"comment": "Variable declaration",
-			"match": "\\b(let|const)\\s+(\\w+)\\s*:\\s*(\\w+)\\b",
-			"captures": {
-				"1": {
-					"name": "keyword.other.graphene"
-				},
-				"2": {
-					"name": "variable.name.graphene"
-				},
-				"3": {
-					"name": "entity.name.type.graphene"
-				}
-			}
+			"include": "#variables"
 		},
 		{
 			"comment": "Function call",
@@ -309,6 +297,63 @@
 				"typedef-definition": {
 					"begin": "(?<=:)",
 					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#struct-definition"
+						},
+						{
+							"include": "#type-name"
+						}
+					]
+				}
+			}
+		},
+		"variables": {
+			"patterns": [
+				{
+					"include": "#variable-declaration"
+				}
+			],
+			"repository": {
+				"variable-declaration": {
+					"begin": "\\b(let|const)\\b",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.other.variable.graphene"
+						}
+					},
+					"end": ";|=",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#variable-name"
+						},
+						{
+							"include": "#variable-type"
+						}
+					]
+				},
+				"variable-name": {
+					"begin": "\\G",
+					"end": ":",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"match": "\\w+",
+							"name": "variable.name.graphene"
+						}
+					]
+				},
+				"variable-type": {
+					"begin": "(?<=:)",
+					"end": "(?=;|=)",
 					"patterns": [
 						{
 							"include": "#comments"
