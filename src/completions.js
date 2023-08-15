@@ -52,12 +52,21 @@ function activate(context) {
                 "for ${1:i} in range(${2:upper}) {\n\t${0:$BLOCK_COMMENT_START code $BLOCK_COMMENT_END}\n}"
             );
 
-            return [for_sn, for_range_sn]
+            const req_sn = new vscode.CompletionItem(
+                { label: "require", description: "Code snippet for @require_once" }
+            );
+            req_sn.insertText = new vscode.SnippetString(
+                // Note the missing @ prefix, as vscode doesn't count that
+                // symbol as part of the currently-typed word. Including it
+                // results in `@@require_once`.
+                "require_once \"${0:std/}\""
+            );
+
+            return [for_sn, for_range_sn, req_sn]
         }
     });
 
     context.subscriptions.push(kw_provider, sn_provider);
 }
-
 
 module.exports = { activate };
