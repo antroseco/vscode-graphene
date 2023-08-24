@@ -50,6 +50,20 @@ function position_after_last_requires(document) {
     return document.positionAt(match.index).translate(1);
 }
 
+class GrapheneCompletionItem extends vscode.CompletionItem {
+    /**
+     * @param {string | vscode.CompletionItemLabel} label
+     * @param {vscode.TextDocument} document
+     * @param {string} requires
+     */
+    constructor(label, document, requires) {
+        super(label, undefined);
+
+        this.document = document;
+        this.requires = requires;
+    }
+}
+
 /**
  * @param {vscode.ExtensionContext} context
  */
@@ -74,22 +88,13 @@ function activate(context) {
                 "for ${1:i} in ${2:iterator} {\n\t${0:$BLOCK_COMMENT_START code $BLOCK_COMMENT_END}\n}"
             );
 
-            const for_range_sn = new vscode.CompletionItem(
-                { label: "forrange", description: "Code snippet for range-based for loop" }
+            const for_range_sn = new GrapheneCompletionItem(
+                { label: "forrange", description: "Code snippet for range-based for loop" },
+                document, "std/iterators.c3"
             );
             for_range_sn.insertText = new vscode.SnippetString(
                 "for ${1:i} in range(${2:upper}) {\n\t${0:$BLOCK_COMMENT_START code $BLOCK_COMMENT_END}\n}"
             );
-
-            // Automatically include `std/iterators.c3` if it's not already
-            // included.
-            if (!document_requires_path(document, "std/iterators.c3")) {
-                const for_range_te = vscode.TextEdit.insert(
-                    position_after_last_requires(document),
-                    '@require_once "std/iterators.c3"\n'
-                );
-                for_range_sn.additionalTextEdits = [for_range_te];
-            }
 
             const req_sn = new vscode.CompletionItem(
                 { label: "require", description: "Code snippet for @require_once" }
@@ -102,6 +107,28 @@ function activate(context) {
             );
 
             return [for_sn, for_range_sn, req_sn]
+        },
+        /**
+         * @param {vscode.CompletionItem | GrapheneCompletionItem} item
+         * @param {vscode.CancellationToken} token
+         */
+        resolveCompletionItem(item, token) {
+            // Ignore vanilla completion items.
+            if (!(item instanceof GrapheneCompletionItem))
+                return item;
+
+            if (!document_requires_path(item.document, item.requires)) {
+                if (token.isCancellationRequested)
+                    return item;
+
+                const require_once_te = vscode.TextEdit.insert(
+                    position_after_last_requires(item.document),
+                    `@require_once "${item.requires}"\n`
+                );
+                item.additionalTextEdits = [require_once_te];
+            }
+
+            return item;
         }
     });
 
