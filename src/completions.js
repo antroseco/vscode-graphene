@@ -1,13 +1,10 @@
 const vscode = require("vscode");
 
 const GRAPHENE_KEYWORDS = [
-    // These four are missing the leading @, as completions don't seem to
-    // trigger when @ is typed.
-    "assignment",
-    "implicit",
-    "operator",
-    "require_once",
-    // Normal keywords.
+    "@assignment",
+    "@implicit",
+    "@operator",
+    "@require_once",
     "const",
     "else",
     "for",
@@ -97,14 +94,9 @@ function activate(context) {
             );
 
             const req_sn = new vscode.CompletionItem(
-                { label: "require", description: "Code snippet for @require_once" }
+                { label: "@require", description: "Code snippet for @require_once" }
             );
-            req_sn.insertText = new vscode.SnippetString(
-                // Note the missing @ prefix, as vscode doesn't count that
-                // symbol as part of the currently-typed word. Including it
-                // results in `@@require_once`.
-                "require_once \"${0:std/}\""
-            );
+            req_sn.insertText = new vscode.SnippetString("@require_once \"${0:std/}\"");
 
             return [for_sn, for_range_sn, req_sn]
         },
