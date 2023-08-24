@@ -18,6 +18,7 @@
         { "open": "\"", "close": "\"", "notIn": ["string"] },
         { "open": "/*", "close": " */", "notIn": ["string"] }
     ],
+    "autoCloseBefore": ";:.,=}])> \n\t",
     // symbols that can be used to surround a selection
     "surroundingPairs": [
         ["{", "}"],
