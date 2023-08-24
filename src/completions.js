@@ -98,7 +98,14 @@ function activate(context) {
             );
             req_sn.insertText = new vscode.SnippetString("@require_once \"${0:std/}\"");
 
-            return [for_sn, for_range_sn, req_sn]
+            const while_sn = new vscode.CompletionItem(
+                { label: "while", description: "Code snippet for while loop" }
+            );
+            while_sn.insertText = new vscode.SnippetString(
+                "while ${1:condition} {\n\t${0:$BLOCK_COMMENT_START code $BLOCK_COMMENT_END}\n}"
+            );
+
+            return [for_sn, for_range_sn, req_sn, while_sn]
         },
         /**
          * @param {vscode.CompletionItem | GrapheneCompletionItem} item
