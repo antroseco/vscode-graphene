@@ -144,6 +144,9 @@
 							"include": "#struct-definition"
 						},
 						{
+							"include": "#at-constants"
+						},
+						{
 							"include": "#type-name"
 						}
 					]
@@ -178,12 +181,26 @@
 				}
 			]
 		},
+		"at-constants": {
+			"patterns": [
+				{
+					"match": "(?<=\\W)@\\w+\\b",
+					"name": "variable.name.graphene"
+				}
+			]
+		},
 		"generics-list": {
 			"begin": "\\[",
 			"end": "\\]",
 			"patterns": [
 				{
+					"include": "#comments"
+				},
+				{
 					"include": "#type-list"
+				},
+				{
+					"include": "#at-constants"
 				}
 			]
 		},
