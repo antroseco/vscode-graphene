@@ -53,7 +53,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.graphene",
-					"match": "\\b(if|else|while|for|in|return)\\b"
+					"match": "\\b(if|else|while|for|in|return|and|or)\\b"
 				},
 				{
 					"name": "keyword.control.import.graphene",
