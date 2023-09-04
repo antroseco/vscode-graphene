@@ -96,7 +96,7 @@ function activate(context) {
             const req_sn = new vscode.CompletionItem(
                 { label: "@require", description: "Code snippet for @require_once" }
             );
-            req_sn.insertText = new vscode.SnippetString("@require_once \"${0:std/}\"");
+            req_sn.insertText = new vscode.SnippetString("@require_once \"${1:std/${0}}\"");
 
             const while_sn = new vscode.CompletionItem(
                 { label: "while", description: "Code snippet for while loop" }
