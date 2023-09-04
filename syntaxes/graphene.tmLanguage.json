@@ -58,6 +58,10 @@
 				{
 					"name": "keyword.control.import.graphene",
 					"match": "(?<=^|\\s)@require_once\\b"
+				},
+				{
+					"name": "invalid.illegal.logical.graphene",
+					"match": "&&|\\|\\|"
 				}
 			]
 		},
