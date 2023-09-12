@@ -193,6 +193,15 @@
 					"comment": "Type identifier",
 					"match": "\\b\\w+\\b",
 					"name": "entity.name.type.graphene"
+				},
+				{
+					"begin": "<",
+					"end": ">|(?=:|\\}|\\))",
+					"patterns": [
+						{
+							"include": "#type-name"
+						}
+					]
 				}
 			]
 		},
