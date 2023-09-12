@@ -24,13 +24,7 @@
 			"include": "#variables"
 		},
 		{
-			"comment": "Function call",
-			"match": "\\b(\\w+)\\(",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.graphene"
-				}
-			}
+			"include": "#function-call"
 		}
 	],
 	"repository": {
@@ -406,6 +400,21 @@
 						{
 							"include": "#struct-definition"
 						},
+						{
+							"include": "#type-name"
+						}
+					]
+				}
+			}
+		},
+		"function-call": {
+			"match": "\\b(\\w+)(?:<(.*)>)?\\(",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.graphene"
+				},
+				"2": {
+					"patterns": [
 						{
 							"include": "#type-name"
 						}
