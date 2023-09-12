@@ -34,18 +34,33 @@
 		}
 	],
 	"repository": {
+		"comment-keywords": {
+			"match": "\\b(NOTE|XXX|HACK|FIXME|BUG|TODO)\\b",
+			"name": "keyword.codetag.notation.graphene"
+		},
 		"comments": {
 			"patterns": [
 				{
 					"comment": "Line comment",
-					"match": "//.*$\\n?",
-					"name": "comment.line.double-slash.graphene"
+					"begin": "//",
+					"end": "$\\n?",
+					"name": "comment.line.double-slash.graphene",
+					"patterns": [
+						{
+							"include": "#comment-keywords"
+						}
+					]
 				},
 				{
 					"comment": "Block comment",
 					"begin": "/\\*",
 					"end": "\\*/",
-					"name": "comment.block.graphene"
+					"name": "comment.block.graphene",
+					"patterns": [
+						{
+							"include": "#comment-keywords"
+						}
+					]
 				}
 			]
 		},
