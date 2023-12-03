@@ -236,7 +236,7 @@
 							"name": "keyword.other.function.graphene"
 						}
 					},
-					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@|=)",
+					"end": "(?=(\\b(mut|foreign|function|let|typedef)\\b)|@|=)",
 					"patterns": [
 						{
 							"include": "#comments"
@@ -279,7 +279,7 @@
 				},
 				"function-return-type": {
 					"begin": "->",
-					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@|=)",
+					"end": "(?=(\\b(mut|foreign|function|let|typedef)\\b)|@|=)",
 					"patterns": [
 						{
 							"include": "#comments"
@@ -308,7 +308,7 @@
 							"name": "keyword.other.typedef.graphene"
 						}
 					},
-					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
+					"end": "(?=(\\b(mut|foreign|function|let|typedef)\\b)|@)",
 					"patterns": [
 						{
 							"include": "#typedef-name"
@@ -335,7 +335,7 @@
 				},
 				"typedef-definition": {
 					"begin": "(?<=:)",
-					"end": "(?=(\\b(const|foreign|function|let|typedef)\\b)|@)",
+					"end": "(?=(\\b(mut|foreign|function|let|typedef)\\b)|@)",
 					"patterns": [
 						{
 							"include": "#comments"
@@ -358,7 +358,7 @@
 			],
 			"repository": {
 				"variable-declaration": {
-					"begin": "\\b(let|const)\\b",
+					"begin": "\\b(let|mut)\\b",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.other.variable.graphene"
