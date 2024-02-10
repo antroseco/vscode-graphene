@@ -200,7 +200,7 @@
 			]
 		},
 		"qualified-type": {
-			"match": "(.+?)((\\bmut)?&|\\b)",
+			"match": "(.+?)((\\bmut)?\\s*?&|\\b)",
 			"captures": {
 				"1": {
 					"patterns": [
