@@ -156,7 +156,7 @@
 							"include": "#at-constants"
 						},
 						{
-							"include": "#type-name"
+							"include": "#qualified-type"
 						}
 					]
 				}
@@ -193,11 +193,26 @@
 					"end": ">|(?=:|\\}|\\))",
 					"patterns": [
 						{
-							"include": "#type-name"
+							"include": "#qualified-type"
 						}
 					]
 				}
 			]
+		},
+		"qualified-type": {
+			"match": "(.+?)((\\bmut)?&|\\b)",
+			"captures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#type-name"
+						}
+					]
+				},
+				"2": {
+					"name": "keyword.other.type.graphene"
+				}
+			}
 		},
 		"at-constants": {
 			"patterns": [
@@ -288,7 +303,7 @@
 							"include": "#struct-definition"
 						},
 						{
-							"include": "#type-name"
+							"include": "#qualified-type"
 						}
 					]
 				}
@@ -344,7 +359,7 @@
 							"include": "#struct-definition"
 						},
 						{
-							"include": "#type-name"
+							"include": "#qualified-type"
 						}
 					]
 				}
@@ -401,7 +416,7 @@
 							"include": "#struct-definition"
 						},
 						{
-							"include": "#type-name"
+							"include": "#qualified-type"
 						}
 					]
 				}
@@ -416,7 +431,7 @@
 				"2": {
 					"patterns": [
 						{
-							"include": "#type-name"
+							"include": "#qualified-type"
 						}
 					]
 				}
