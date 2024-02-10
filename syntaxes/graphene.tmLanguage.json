@@ -21,6 +21,9 @@
 			"include": "#typedefs"
 		},
 		{
+			"include": "#borrow"
+		},
+		{
 			"include": "#variables"
 		},
 		{
@@ -200,7 +203,7 @@
 			]
 		},
 		"qualified-type": {
-			"match": "(.+?)((\\bmut)?\\s*?&|\\b)",
+			"match": "(\\S+?)\\s*((\\bmut)?\\s*?&|\\b)",
 			"captures": {
 				"1": {
 					"patterns": [
@@ -436,6 +439,14 @@
 					]
 				}
 			}
+		},
+		"borrow": {
+			"patterns": [
+				{
+					"match": "&(mut)?",
+					"name": "keyword.other.borrow.graphene"
+				}
+			]
 		}
 	},
 	"scopeName": "source.graphene"
