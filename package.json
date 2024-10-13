@@ -34,6 +34,25 @@
         "scopeName": "source.graphene",
         "path": "./syntaxes/graphene.tmLanguage.json"
       }
+    ],
+    "configuration": [
+      {
+        "title": "Graphene",
+        "properties": {
+          "graphene.languageServer.enable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enables the Graphene language server.",
+            "scope": "window"
+          },
+          "graphene.languageServer.path": {
+            "type": "string",
+            "default": "",
+            "description": "The path to the language server executable.",
+            "scope": "machine-overridable"
+          }
+        }
+      }
     ]
   },
   "main": "src/main.js",

@@ -1,28 +1,66 @@
 const language_client = require("vscode-languageclient/node");
+const vscode = require("vscode");
+const fs = require("fs");
 
 /** @type {language_client.LanguageClient?} */
 let client = null;
 
-/** @param {language_client.ExtensionContext} context */
-function activate(context) {
-    // TODO expose this as a vscode setting.
-    const server_command = "/var/home/antros/Source/vscode-graphene/a.out";
+function start() {
+    let config = vscode.workspace.getConfiguration("graphene.languageServer");
+
+    if (!config.get("enable", false)) {
+        // Language server is disabled.
+        return;
+    }
+
+    if (!config.has("path")) {
+        // Path not available.
+        vscode.window.showWarningMessage("Language server is enabled but the path is not set");
+        return;
+    }
+
+    const path = config.get("path");
+    var bad_path = true;
+    try {
+        fs.accessSync(path, fs.constants.R_OK | fs.constants.X_OK);
+        bad_path = !fs.statSync(path).isFile();
+    }
+    finally {
+        if (bad_path) {
+            // Bad path, this check is for the user's convenience only.
+            vscode.window.showErrorMessage(`Invalid language server path: '${path}'; ${fs.accessSync(path, fs.constants.R_OK | fs.constants.X_OK)}; ${fs.statSync(path).isFile()}`);
+            return;
+        }
+    }
 
     /** @type {language_client.ServerOptions} */
     const server_options = {
         run: {
-            command: server_command,
+            command: path,
             transport: language_client.TransportKind.pipe,
         },
         debug: {
-            command: server_command,
+            command: path,
             transport: language_client.TransportKind.pipe,
         },
     };
 
-    /** @type {language_client.clientOptions} */
+    /** @type {language_client.LanguageClientOptions} */
     const client_options = {
         documentSelector: [{ scheme: "file", language: "graphene" }],
+        errorHandler: {
+            error: (error, _message, _count) => {
+                client.error(`Language server sent an invalid response: '${error}'`);
+                return {
+                    "action": language_client.ErrorAction.Continue
+                };
+            },
+            closed: () => {
+                return {
+                    "action": language_client.CloseAction.DoNotRestart
+                };
+            }
+        }
     };
 
     client = new language_client.LanguageClient(
@@ -33,14 +71,30 @@ function activate(context) {
     );
 
     // Start the client. This will also launch the server.
-    client.start();
+    return client.start();
 }
 
-function deactivate() {
+function stop() {
     if (client === null) {
         return undefined;
     }
     return client.stop();
+}
+
+/** @param {language_client.ExtensionContext} _context */
+function activate(_context) {
+    vscode.workspace.onDidChangeConfiguration(async event => {
+        if (event.affectsConfiguration("graphene.languageServer")) {
+            await stop();
+            return start();
+        }
+    });
+
+    return start();
+}
+
+function deactivate() {
+    return stop();
 }
 
 module.exports = { activate, deactivate };
