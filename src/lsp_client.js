@@ -5,6 +5,32 @@ const fs = require("fs");
 /** @type {language_client.LanguageClient?} */
 let client = null;
 
+/**
+ * @param {vscode.WorkspaceConfiguration} config
+ * @param {string} identifier
+ * @param {string} name
+ * @returns {string | undefined}
+ */
+function get_path_from_config(config, identifier, name) {
+    if (!config.has(identifier)) {
+        // Path not available.
+        vscode.window.showWarningMessage(`Language server is enabled but the ${name} path is not set`);
+        return undefined;
+    }
+
+    const path = config.get(identifier);
+    try {
+        fs.accessSync(path, fs.constants.R_OK | fs.constants.X_OK);
+    }
+    catch {
+        // Bad path, this check is for the user's convenience only.
+        vscode.window.showErrorMessage(`Invalid ${name} path: '${path}'`);
+        return undefined;
+    }
+
+    return path;
+}
+
 function start() {
     let config = vscode.workspace.getConfiguration("graphene.languageServer");
 
@@ -13,32 +39,24 @@ function start() {
         return;
     }
 
-    if (!config.has("path")) {
-        // Path not available.
-        vscode.window.showWarningMessage("Language server is enabled but the path is not set");
+    const server_path = get_path_from_config(config, "serverPath", "server");
+    const parser_path = get_path_from_config(config, "parserPath", "parser");
+
+    if (server_path === undefined || parser_path === undefined) {
         return;
     }
 
-    const path = config.get("path");
-    try {
-        fs.accessSync(path, fs.constants.R_OK | fs.constants.X_OK);
-    }
-    catch {
-        // Bad path, this check is for the user's convenience only.
-        vscode.window.showErrorMessage(`Invalid language server path: '${path}'`);
-        return;
-    }
+    /** @type {language_client.Executable} */
+    const executable = {
+        command: server_path,
+        transport: language_client.TransportKind.pipe,
+        args: [`--parser=${parser_path}`]
+    };
 
     /** @type {language_client.ServerOptions} */
     const server_options = {
-        run: {
-            command: path,
-            transport: language_client.TransportKind.pipe,
-        },
-        debug: {
-            command: path,
-            transport: language_client.TransportKind.pipe,
-        },
+        run: executable,
+        debug: executable,
     };
 
     /** @type {language_client.LanguageClientOptions} */

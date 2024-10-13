@@ -45,10 +45,16 @@
             "description": "Enables the Graphene language server.",
             "scope": "window"
           },
-          "graphene.languageServer.path": {
+          "graphene.languageServer.serverPath": {
             "type": "string",
             "default": "",
             "description": "The path to the language server executable.",
+            "scope": "machine-overridable"
+          },
+          "graphene.languageServer.parserPath": {
+            "type": "string",
+            "default": "/usr/lib64/python3.12/site-packages/glang/bin/parser",
+            "description": "The path to the Graphene parser executable.",
             "scope": "machine-overridable"
           }
         }
