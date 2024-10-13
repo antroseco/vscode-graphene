@@ -28,7 +28,7 @@ function start() {
     finally {
         if (bad_path) {
             // Bad path, this check is for the user's convenience only.
-            vscode.window.showErrorMessage(`Invalid language server path: '${path}'; ${fs.accessSync(path, fs.constants.R_OK | fs.constants.X_OK)}; ${fs.statSync(path).isFile()}`);
+            vscode.window.showErrorMessage(`Invalid language server path: '${path}'`);
             return;
         }
     }
