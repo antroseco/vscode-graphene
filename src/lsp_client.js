@@ -20,17 +20,13 @@ function start() {
     }
 
     const path = config.get("path");
-    var bad_path = true;
     try {
         fs.accessSync(path, fs.constants.R_OK | fs.constants.X_OK);
-        bad_path = !fs.statSync(path).isFile();
     }
-    finally {
-        if (bad_path) {
-            // Bad path, this check is for the user's convenience only.
-            vscode.window.showErrorMessage(`Invalid language server path: '${path}'`);
-            return;
-        }
+    catch {
+        // Bad path, this check is for the user's convenience only.
+        vscode.window.showErrorMessage(`Invalid language server path: '${path}'`);
+        return;
     }
 
     /** @type {language_client.ServerOptions} */
