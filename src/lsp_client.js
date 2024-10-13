@@ -31,7 +31,7 @@ function get_path_from_config(config, identifier, name) {
     return path;
 }
 
-function start() {
+async function start() {
     let config = vscode.workspace.getConfiguration("graphene.languageServer");
 
     if (!config.get("enable", false)) {
@@ -88,7 +88,7 @@ function start() {
     return client.start();
 }
 
-function stop() {
+async function stop() {
     if (client === null) {
         return undefined;
     }
@@ -96,7 +96,7 @@ function stop() {
 }
 
 /** @param {language_client.ExtensionContext} _context */
-function activate(_context) {
+async function activate(_context) {
     vscode.workspace.onDidChangeConfiguration(async event => {
         if (event.affectsConfiguration("graphene.languageServer")) {
             await stop();
@@ -107,7 +107,7 @@ function activate(_context) {
     return start();
 }
 
-function deactivate() {
+async function deactivate() {
     return stop();
 }
 
