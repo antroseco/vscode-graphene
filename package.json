@@ -3,7 +3,7 @@
   "displayName": "Graphene syntax highlighting",
   "description": "Syntax highlighting for the Graphene language",
   "publisher": "antroseco",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -34,9 +34,37 @@
         "scopeName": "source.graphene",
         "path": "./syntaxes/graphene.tmLanguage.json"
       }
+    ],
+    "configuration": [
+      {
+        "title": "Graphene",
+        "properties": {
+          "graphene.languageServer.enable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enables the Graphene language server.",
+            "scope": "window"
+          },
+          "graphene.languageServer.serverPath": {
+            "type": "string",
+            "default": "",
+            "description": "The path to the language server executable.",
+            "scope": "machine-overridable"
+          },
+          "graphene.languageServer.parserPath": {
+            "type": "string",
+            "default": "/usr/lib64/python3.12/site-packages/glang/bin/parser",
+            "description": "The path to the Graphene parser executable.",
+            "scope": "machine-overridable"
+          }
+        }
+      }
     ]
   },
-  "main": "src/completions.js",
+  "main": "src/main.js",
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
   "devDependencies": {
     "@vscode/vsce": "^2.16.0",
     "@types/vscode": "^1.74.0"

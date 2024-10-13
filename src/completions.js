@@ -134,4 +134,8 @@ function activate(context) {
     context.subscriptions.push(kw_provider, sn_provider);
 }
 
-module.exports = { activate };
+function deactivate() {
+    // Nothing to do.
+}
+
+module.exports = { activate, deactivate };
